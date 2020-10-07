@@ -14,7 +14,8 @@ add = (conv) ->
         {conversation, event} = conv
         conv = conversation
         # remove observed events
-        conv.event = (e for e in event when !e.event_id.match(/observed_/))
+        if (event)
+            conv.event = (e for e in event when !e.event_id.match(/observed_/))
 
     {id} = conv.conversation_id or conv.id
     if lookup[id] and conv?.self_conversation_state?.self_read_state?.latest_read_timestamp == 0
